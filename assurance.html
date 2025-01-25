@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Soumission Assurance Auto</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Menu de Navigation -->
+  <header>
+    <nav>
+      <ul class="menu">
+        <li><a href="home.html">Accueil</a></li>
+        <li><a href="#form">Soumission</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Section Accueil -->
+  <section id="home" class="home">
+    <h1>Bienvenue sur le Portail de Soumission d'Assurance Auto</h1>
+    <p>Obtenez une estimation rapide de vos frais d'assurance auto en quelques clics.</p>
+  </section>
+
+  <!-- Section Formulaire de Soumission -->
+  <section id="form">
+    <h2>Soumettez vos informations</h2>
+    <form id="insuranceForm" onsubmit="return calculateInsurance()">
+      <!-- Genre -->
+      <label for="gender">Quel est votre genre?</label>
+      <select id="gender" required>
+        <option value="">Sélectionner</option>
+        <option value="homme">Homme</option>
+        <option value="femme">Femme</option>
+        <option value="non-binaire">Non-binaire</option>
+      </select>
+      <div id="genderError" class="error"></div>
+
+      <!-- Date de naissance -->
+      <label for="birthDate">Quelle est votre date de naissance?</label>
+      <input type="date" id="birthDate" required>
+      <div id="birthDateError" class="error"></div>
+
+      <!-- Valeur du véhicule -->
+      <label for="carValue">Quelle est la valeur de votre véhicule?</label>
+      <input type="text" id="carValue" required>
+      <div id="carValueError" class="error"></div>
+
+      <!-- Année de fabrication -->
+      <label for="carYear">Quelle est l'année de fabrication de votre véhicule?</label>
+      <input type="text" id="carYear" oninput="validateCarYear()" required>
+      <div id="carYearError" class="error"></div>
+
+      <!-- Kilométrage annuel -->
+      <label for="annualMileage">Combien de kilomètres parcourez-vous par an?</label>
+      <input type="text" id="annualMileage" oninput="validateAnnualMileage()" required>
+      <div id="annualMileageError" class="error"></div>
+
+      <!-- Caméra de recul -->
+      <label for="rearCamera">Votre véhicule est-il équipé d'une caméra de recul?</label>
+      <select id="rearCamera" required>
+        <option value="">Sélectionner</option>
+        <option value="oui">Oui</option>
+        <option value="non">Non</option>
+      </select>
+      <div id="rearCameraError" class="error"></div>
+
+      <!-- Réclamations -->
+      <label for="claimMade">Avez-vous fait des réclamations dans les 6 dernières années?</label>
+      <select id="claimMade" onchange="displayFields()" required>
+        <option value="">Sélectionner</option>
+        <option value="oui">Oui</option>
+        <option value="non">Non</option>
+      </select>
+      <div id="claimMadeError" class="error"></div>
+
+      <!-- Nombre de réclamations -->
+      <div id="claimDetails" class="hidden">
+        <label for="claimNumber">Combien de réclamations (0-5)?</label>
+        <input type="text" id="claimNumber" oninput="validateClaimNumber()" required>
+        <div id="claimNumberError" class="error"></div>
+        <div id="claimAmounts"></div>
+      </div>
+
+      <!-- Bouton de soumission -->
+      <button type="submit">Calculer le montant de l'assurance</button>
+    </form>
+
+    <!-- Affichage du résultat -->
+    <div id="result" class="hidden">
+      <h3>Montant estimé de l'assurance :</h3>
+      <p><span id="insuranceAmount"></span></p>
+    </div>
+
+    <!-- Raisons pour un profil inassurable -->
+    <div id="reason" class="hidden">
+      <h3>Nous ne pouvons pas assurer ce profil.</h3>
+      <em>Les raisons ci-dessous:</em>
+      <h6>Pourquoi ce profil n'est pas assurable :</h6>
+      <p id="reasonMessage"></p>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2024 Soumissions d'Assurance Auto - Tous droits réservés.</p>
+  </footer>
+
+  <script src="scriptjs.js"></script>
+</body>
+</html>
